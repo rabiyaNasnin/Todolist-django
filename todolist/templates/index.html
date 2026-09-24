@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My To-Do List</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <div class="todo-container">
+
+        <!-- HEADER -->
+        <div class="todo-header">
+
+            <div class="header-title">
+                <h1>My To-Do List</h1>
+            </div>
+
+            <form method="POST" action="{% url 'logout' %}" class="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="logout-button">
+                    Logout
+                </button>
+            </form>
+
+        </div>
+
+
+        <!-- MAIN CARD -->
+        <div class="todo-card">
+
+            <!-- ADD TASK -->
+            <form method="POST" action="/" class="add-form">
+
+                {% csrf_token %}
+
+                {{ form.title }}
+
+                <button type="submit" class="add-button">
+                    + Add Task
+                </button>
+
+            </form>
+
+
+            <!-- TASK LIST -->
+            <div class="task-list">
+
+                {% if tasks %}
+
+                    {% for task in tasks %}
+
+                        <div class="task {% if task.completed %}completed{% endif %}">
+
+                            <div class="task-content">
+
+                                {% if task.completed %}
+
+                                    <span class="check completed-check">
+                                        ✓
+                                    </span>
+
+                                    <span class="task-title completed-title">
+                                        {{ task.title }}
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="check empty-check"></span>
+
+                                    <span class="task-title">
+                                        {{ task.title }}
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <!-- ACTION BUTTONS -->
+                            <div class="actions">
+
+                                <a href="{% url 'update_task' task.id %}"
+                                   class="edit-btn"
+                                   title="Edit Task">
+                                    ✏️
+                                </a>
+
+                                <a href="{% url 'delete_task' task.id %}"
+                                   class="delete-btn"
+                                   title="Delete Task">
+                                    🗑️
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <!-- EMPTY STATE -->
+                    <div class="empty">
+
+                        <div class="empty-icon">
+                            📝
+                        </div>
+
+                        <h3>No tasks yet!</h3>
+
+                        <p>Add your first task above and get started.</p>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <p class="footer-text">
+            Stay productive • One task at a time 💜
+        </p>
+
+    </div>
+
+</body>
+</html>

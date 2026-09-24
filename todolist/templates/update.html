@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Task</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<div class="task-page">
+
+    <div class="task-card">
+
+        <div class="task-icon">
+            ✏️
+        </div>
+
+        <h1>Edit Task</h1>
+
+        <p class="task-subtitle">
+            Update your task details
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="save-button">
+                Save Changes
+            </button>
+
+            <a href="{% url 'index' %}" class="cancel-button">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
