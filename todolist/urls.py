@@ -15,7 +15,9 @@ urlpatterns = [
         name='logout'
     ),
     path(
-        '', views.index, name='index'
+        '',
+        views.index,
+        name='index'
     ),
     path(
         'update/<int:pk>/',
@@ -26,6 +28,16 @@ urlpatterns = [
         'delete/<int:pk>/',
         views.deleteTask, 
         name='delete_task'
+    ),
+    path(
+        'api/tasks/',
+        views.task_api,
+        name='task_api'
+    ),
+    path(
+        'api/tasks/<int:pk>/',
+        views.task_detail_api,
+        name='task_detail_api'
     ),
          
 ]

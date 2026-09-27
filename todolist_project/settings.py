@@ -31,6 +31,10 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://todolist-django-4y3i.onrender.com',
+]
+
 
 # Application definition
 
